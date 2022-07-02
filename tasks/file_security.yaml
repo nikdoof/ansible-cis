@@ -1,16 +1,22 @@
 ---
-- name: Change grub file modes  # noqa: ignore-errors
-  file:
+- name: Check if grub file exists
+  ansible.builtin.stat:
     path: "{{ item }}"
-    owner: root
-    group: root
-    mode: "0600"
-  ignore_errors: true
+  register: grub_results
   loop:
     - /boot/grub2/grub.cfg
     - /boot/grub2/grubenv
+  ignore_errors: true
+- name: Change grub file modes
+  ansible.builtin.file:
+    path: "{{ item.item }}"
+    owner: root
+    group: root
+    mode: "0600"
+  loop: "{{ grub_results.results }}"
+  when: item.stat.exists
 - name: Change MOTD files security
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     owner: root
     group: root
@@ -19,23 +25,3 @@
     - /etc/motd
     - /etc/issue
     - /etc/issue.net
-- name: Set cron file security
-  file:
-    path: "{{ item }}"
-    owner: root
-    group: root
-    mode: "0600"
-  loop:
-    - /etc/crontab
-- name: Set cron.* directory security
-  file:
-    path: "{{ item }}"
-    owner: root
-    group: root
-    mode: "0700"
-  loop:
-    - /etc/cron.hourly
-    - /etc/cron.daily
-    - /etc/cron.weekly
-    - /etc/cron.monthly
-    - /etc/cron.d

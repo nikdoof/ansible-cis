@@ -1,12 +1,12 @@
 ---
 - name: Set sshd_config file security
-  file:
+  ansible.builtin.file:
     path: /etc/ssh/sshd_config
     owner: root
     group: root
     mode: "0600"
 - name: Set SSHD configuration values
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: "^{{ item.key }}"
     line: "{{ item.key }} {{ item.value }}"

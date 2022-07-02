@@ -1,14 +1,11 @@
 ---
 - name: Install AIDE
-  dnf:
+  ansible.builtin.package:
     name: aide
     state: installed
-- name: Init AIDE if database is missing
-  shell: aide --init && mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
-  args:
-    creates: /var/lib/aide/aide.db.gz
+  notify: init aide
 - name: Install AIDE crontab
-  copy:
+  ansible.builtin.copy:
     dest: /etc/cron.d/aide
     owner: root
     group: root
@@ -17,4 +14,4 @@
       SHELL=/bin/bash
       PATH=/sbin:/bin:/usr/sbin:/usr/bin
       MAILTO=root
-      0 5 * * * root /usr/sbin/aide --check
+      0 5 * * * root /usr/sbin/aide --update; mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
