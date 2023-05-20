@@ -8,3 +8,4 @@
     state: present
     fstype: proc
   notify: remount proc
+  when: cis_hide_proc

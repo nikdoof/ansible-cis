@@ -12,7 +12,7 @@
 - name: remount proc
   ansible.posix.mount:
     path: /proc
-    state: remount
+    state: remounted
 - name: restart journald
   ansible.builtin.service:
     name: systemd-journald
