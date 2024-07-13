@@ -1,13 +1,13 @@
 ---
-- include: auditd.yaml
-- include: limits.yaml
-- include: proc.yaml
-- include: sudo.yaml
-- include: file_security.yaml
-- include: cron.yaml
-- include: ssh.yaml
-- include: sysctl.yaml
-- include: logindefs.yaml
-- include: journald.yaml
-- include: rsyslog.yaml
-- include: aide.yaml
+- include_tasks: auditd.yaml
+- include_tasks: limits.yaml
+- include_tasks: proc.yaml
+- include_tasks: sudo.yaml
+- include_tasks: file_security.yaml
+- include_tasks: cron.yaml
+- include_tasks: ssh.yaml
+- include_tasks: sysctl.yaml
+- include_tasks: logindefs.yaml
+- include_tasks: journald.yaml
+- include_tasks: rsyslog.yaml
+- include_tasks: aide.yaml
