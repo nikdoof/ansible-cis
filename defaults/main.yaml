@@ -1,2 +1,4 @@
 ---
 cis_hide_proc: false
+
+cis_cron_service_name: crond

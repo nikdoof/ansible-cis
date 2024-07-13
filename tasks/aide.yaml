@@ -2,7 +2,7 @@
 - name: Install AIDE
   ansible.builtin.package:
     name: aide
-    state: installed
+    state: present
   notify: init aide
 - name: Install AIDE crontab
   ansible.builtin.copy:

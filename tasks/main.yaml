@@ -1,4 +1,10 @@
 ---
+- name: CIS - Get OS specific vars
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "os/{{ ansible_os_family }}/{{ ansible_distribution_major_version }}.yaml"
+    - "os/{{ ansible_os_family }}.yaml"
+
 - include_tasks: auditd.yaml
 - include_tasks: limits.yaml
 - include_tasks: proc.yaml

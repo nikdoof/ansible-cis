@@ -1,7 +1,7 @@
 ---
-- name: Enable crond
+- name: Enable cron
   ansible.builtin.service:
-    name: crond
+    name: "{{ cis_cron_service_name }}"
     state: started
     enabled: true
 - name: Set cron file security

@@ -3,7 +3,7 @@ allow_duplicates: false
 
 galaxy_info:
   role_name: cis
-  author: Andrew Williams
+  author: nikdoof
   description: Configures a RHEL systems to CIS specs
   license: MIT
 
@@ -13,6 +13,9 @@ galaxy_info:
     - name: RedHat
       versions:
         - 8
+    - name: Debian
+      versions:
+        - bookworm
 
   collections:
     - ansible.posix

@@ -1,4 +1,13 @@
 ---
+- name: Install auditd
+  ansible.builtin.package:
+    name: auditd
+    state: present
+- name: Start auditd
+  ansible.builtin.service:
+    name: auditd
+    state: started
+    enabled: true
 - name: Copy main CIS benchmark ruleset
   ansible.builtin.copy:
     src: auditd/cis-hardening.rules
