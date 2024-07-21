@@ -1,7 +1,7 @@
 ---
 - name: Install auditd
   ansible.builtin.package:
-    name: auditd
+    name: "{{ cis_auditd_package }}"
     state: present
 - name: Start auditd
   ansible.builtin.service:
