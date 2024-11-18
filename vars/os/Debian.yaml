@@ -1,2 +1,6 @@
 ---
 cis_cron_service_name: cron
+
+cis_aide_options: --config /etc/aide/aide.conf
+cis_aide_new_file: /var/lib/aide/aide.db.new
+cis_aide_current_file: /var/lib/aide/aide.db

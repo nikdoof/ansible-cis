@@ -3,7 +3,14 @@
   ansible.builtin.package:
     name: aide
     state: present
-  notify: init aide
+
+- name: Init AIDE database
+  ansible.builtin.shell: "aide --init {{ cis_aide_options }} && mv {{ cis_aide_new_file }} {{ cis_aide_current_file }}"
+  args:
+    creates: "{{ cis_aide_current_file }}"
+  async: 300
+  poll: 0
+
 - name: Install AIDE crontab
   ansible.builtin.copy:
     dest: /etc/cron.d/aide
@@ -14,4 +21,4 @@
       SHELL=/bin/bash
       PATH=/sbin:/bin:/usr/sbin:/usr/bin
       MAILTO=root
-      0 5 * * * root aide --update; mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+      0 5 * * * root aide --update {{ cis_aide_options }} && mv {{ cis_aide_new_file }} {{ cis_aide_current_file }}
