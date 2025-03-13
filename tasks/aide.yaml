@@ -11,6 +11,19 @@
   async: 300
   poll: 0
 
+- name: Add excluded folders to AIDE, if defined
+  ansible.builtin.copy:
+    dest: /etc/aide.conf.d/98_aide_exclusions
+    owner: root
+    group: root
+    mode: u=rw,go=r
+    content: |
+      {% for directory in cis_aide_excluded_directories %}
+      !{{ directory }}
+      {% endfor %}
+    when:
+      - cis_aide_excluded_directories is defined
+
 - name: Install AIDE crontab
   ansible.builtin.copy:
     dest: /etc/cron.d/aide
