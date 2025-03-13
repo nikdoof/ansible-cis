@@ -4,6 +4,6 @@ cis_hide_proc: false
 cis_cron_service_name: crond
 cis_auditd_package: auditd
 
-cis_aide_options:
+cis_aide_options: "--config {{ cis_aide_config_file }}"
 cis_aide_new_file: /var/lib/aide/aide.db.new.gz
 cis_aide_current_file: /var/lib/aide/aide.db.gz

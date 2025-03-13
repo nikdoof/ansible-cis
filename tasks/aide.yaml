@@ -13,7 +13,7 @@
 
 - name: Add excluded folders to AIDE, if defined
   ansible.builtin.copy:
-    dest: /etc/aide.conf.d/98_aide_exclusions
+    dest: "{{ cis_aide_config_path }}/98_aide_exclusions"
     owner: root
     group: root
     mode: u=rw,go=r
@@ -22,6 +22,19 @@
       !{{ directory }}
       {% endfor %}
   when:
+    - cis_aide_config_path
+    - cis_aide_excluded_directories is defined
+
+- name: Add excluded folders to AIDE, if defined
+  ansible.builtin.blockinfile:
+    path: "{{ cis_aide_config_file }}"
+    marker: "# Ansible CIS role managed block - {mark}"
+    block: |
+      {% for directory in cis_aide_excluded_directories %}
+      !{{ directory }}
+      {% endfor %}
+  when:
+    - not cis_aide_config_path
     - cis_aide_excluded_directories is defined
 
 - name: Install AIDE crontab

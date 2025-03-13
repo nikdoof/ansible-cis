@@ -1,2 +1,4 @@
 ---
 cis_auditd_package: audit
+
+cis_aide_config_file: /etc/aide.conf
