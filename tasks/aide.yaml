@@ -21,8 +21,8 @@
       {% for directory in cis_aide_excluded_directories %}
       !{{ directory }}
       {% endfor %}
-    when:
-      - cis_aide_excluded_directories is defined
+  when:
+    - cis_aide_excluded_directories is defined
 
 - name: Install AIDE crontab
   ansible.builtin.copy:
