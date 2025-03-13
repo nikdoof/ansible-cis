@@ -47,4 +47,4 @@
       SHELL=/bin/bash
       PATH=/sbin:/bin:/usr/sbin:/usr/bin
       MAILTO=root
-      0 5 * * * root aide --update {{ cis_aide_options }} && mv {{ cis_aide_new_file }} {{ cis_aide_current_file }}
+      0 5 * * * root aide --update {{ cis_aide_options }}; mv {{ cis_aide_new_file }} {{ cis_aide_current_file }}
